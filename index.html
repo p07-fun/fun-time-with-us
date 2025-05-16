@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FunTime With Us</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -71,6 +72,15 @@
   <button onclick="generateFun()">Let's Have Some Fun!</button>
   <div id="card" class="flashcard"></div>
 
+  <!-- Flashcard Section (new interactive one) -->
+  <div class="container">
+    <div class="flashcard" id="flashcard">
+      <div class="front" id="front">Click to Reveal</div>
+      <div class="back" id="back">Answer will appear here</div>
+    </div>
+    <button id="newCardBtn">New Card</button>
+  </div>
+
   <script>
     const funIdeas = [
       { text: "Plan your next holiday and Virtually travel", emoji: "🌍" },
@@ -103,6 +113,6 @@
       card.style.display = "block";
     }
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
-It's for you meri MUMYUMJAAN!

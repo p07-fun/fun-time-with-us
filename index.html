@@ -3,43 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FunTime With Us</title>
+  <title>FunTime With MUMYUMJAAN (Shammu RANI ! </title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to bottom right, #fff1eb, #ace0f9);
+      font-family: 'Fredoka', cursive;
+      background: radial-gradient(circle at top left, #ffe4e1, #ace0f9, #fff1eb);
       text-align: center;
       padding: 0;
       margin: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       height: 100vh;
+      animation: floatBackground 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBackground {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
     }
 
     h1 {
       color: #ff4081;
-      font-size: 2.8rem;
-      margin-bottom: 20px;
+      font-size: 3rem;
+      margin: 30px 0 20px;
+      text-shadow: 2px 2px #fff0f0;
     }
 
     button {
       padding: 15px 30px;
       font-size: 1.2rem;
       border: none;
-      border-radius: 12px;
+      border-radius: 20px;
       background-color: #ff4081;
       color: white;
       cursor: pointer;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s ease, background-color 0.3s ease;
+      font-weight: bold;
     }
 
     button:hover {
       background-color: #e91e63;
-      transform: scale(1.05);
+      transform: scale(1.08) rotate(-1deg);
     }
 
     .flashcard {
@@ -53,17 +62,23 @@
       color: #333;
       animation: popIn 0.5s ease;
       display: none;
+      position: relative;
+    }
+
+    .emoji {
+      font-size: 2.8rem;
+      display: inline-block;
+      animation: spinEmoji 1s ease-in-out;
     }
 
     @keyframes popIn {
-      from {
-        opacity: 0;
-        transform: scale(0.7);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(0.7); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes spinEmoji {
+      from { transform: rotate(-360deg) scale(0); }
+      to { transform: rotate(0deg) scale(1); }
     }
   </style>
 </head>
@@ -72,7 +87,6 @@
   <button onclick="generateFun()">Let's Have Some Fun!</button>
   <div id="card" class="flashcard"></div>
 
-  <!-- Flashcard Section (new interactive one) -->
   <div class="container">
     <div class="flashcard" id="flashcard">
       <div class="front" id="front">Click to Reveal</div>
@@ -80,6 +94,12 @@
     </div>
     <button id="newCardBtn">New Card</button>
   </div>
+
+  <!-- Sound Effect -->
+  <audio id="popSound" src="https://www.myinstants.com/media/sounds/pop.mp3" preload="auto"></audio>
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
     const funIdeas = [
@@ -109,7 +129,23 @@
     function generateFun() {
       const card = document.getElementById("card");
       const { text, emoji } = funIdeas[Math.floor(Math.random() * funIdeas.length)];
-      card.innerHTML = `<div style="font-size: 2.5rem;">${emoji}</div><div style="margin-top: 15px;">${text}</div>`;
+
+      // Pop sound
+      const sound = document.getElementById("popSound");
+      sound.currentTime = 0;
+      sound.play();
+
+      // Confetti burst
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      card.innerHTML = `
+        <div class="emoji">${emoji}</div>
+        <div style="margin-top: 15px;">${text}</div>
+      `;
       card.style.display = "block";
     }
   </script>

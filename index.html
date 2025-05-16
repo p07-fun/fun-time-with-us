@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FunTime With MUMYUMJAAN (Shammu RANI !) </title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
@@ -68,7 +67,7 @@
     .emoji {
       font-size: 2.8rem;
       display: inline-block;
-      animation: spinEmoji 1s ease-in-out;
+      animation: emojiDance 1s infinite ease-in-out;
     }
 
     @keyframes popIn {
@@ -76,24 +75,33 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes spinEmoji {
-      from { transform: rotate(-360deg) scale(0); }
-      to { transform: rotate(0deg) scale(1); }
+    @keyframes emojiDance {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-20deg) scale(1.2); }
+      50% { transform: rotate(20deg) scale(1.2); }
+      75% { transform: rotate(-10deg) scale(1); }
+    }
+
+    .reaction {
+      font-size: 1.2rem;
+      margin-top: 15px;
+      color: #ff1493;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>FunTime With FunTime With MUMYUMJAAN (Shammu RANI !) 💑</h1>
+  <h1>FunTime With MUMYUMJAAN (Shammu RANI !) 💑</h1>
   <button onclick="generateFun()">Let's Have Some Fun!</button>
   <div id="card" class="flashcard"></div>
 
-  <div class="container">
-    <div class="flashcard" id="flashcard">
-      <div class="front" id="front">Click to Reveal</div>
-      <div class="back" id="back">Answer will appear here</div>
-
   <!-- Sound Effect -->
-  <audio id="popSound" src="https://www.myinstants.com/media/sounds/pop.mp3" preload="auto"></audio>
+  <audio id="popSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_70f5fcb8ee.mp3?filename=cartoon-jump-6462.mp3" preload="auto"></audio>
 
   <!-- Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -123,12 +131,24 @@
       { text: "Full back massage", emoji: "💆‍♂️💆‍♀️" }
     ];
 
+    const reactions = [
+      "🥵 Mummy liked that!",
+      "💋 Hot pick!",
+      "😅 Umm... bold one!",
+      "🔥 That’s spicy!",
+      "😂 Naughty and cute!",
+      "😍 Made with love!"
+    ];
+
+    let completed = 0;
+
     function generateFun() {
       const card = document.getElementById("card");
-      const { text, emoji } = funIdeas[Math.floor(Math.random() * funIdeas.length)];
-
-      // Pop sound
       const sound = document.getElementById("popSound");
+      const randomIdea = funIdeas[Math.floor(Math.random() * funIdeas.length)];
+      const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
+
+      // Reset sound and play
       sound.currentTime = 0;
       sound.play();
 
@@ -139,13 +159,14 @@
         origin: { y: 0.6 }
       });
 
+      completed++;
       card.innerHTML = `
-        <div class="emoji">${emoji}</div>
-        <div style="margin-top: 15px;">${text}</div>
+        <div class="emoji">${randomIdea.emoji}</div>
+        <div style="margin-top: 15px;">${randomIdea.text}</div>
+        <div class="reaction">${randomReaction} 💕 (${completed} ideas so far!)</div>
       `;
       card.style.display = "block";
     }
   </script>
-  <script src="script.js"></script>
 </body>
 </html>

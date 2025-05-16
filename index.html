@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FunTime With Us</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #fff1eb, #ace0f9);
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #ff4081;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ff4081;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e91e63;
+      transform: scale(1.05);
+    }
+
+    .flashcard {
+      margin-top: 30px;
+      padding: 30px;
+      max-width: 400px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      font-size: 1.6rem;
+      color: #333;
+      animation: popIn 0.5s ease;
+      display: none;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>FunTime With Us 💑</h1>
+  <button onclick="generateFun()">Let's Have Some Fun!</button>
+  <div id="card" class="flashcard"></div>
+
+  <script>
+    const funIdeas = [
+      { text: "Plan your next holiday and Virtually travel", emoji: "🌍" },
+      { text: "Geoguesser game", emoji: "🗺️" },
+      { text: "Cook/order food from next holiday destination", emoji: "🍜" },
+      { text: "Nude photography", emoji: "📸😏" },
+      { text: "Order gift for Abbu", emoji: "🎁👴" },
+      { text: "Amazing head massage", emoji: "💆‍♂️" },
+      { text: "Bra shopping", emoji: "🛍️👙" },
+      { text: "Have Tandoori Chicken/Malai Kebab", emoji: "🍗🔥" },
+      { text: "Raunchy video editing", emoji: "🎬😉" },
+      { text: "T-shirt shopping", emoji: "👕🛍️" },
+      { text: "Order gift for Ammi", emoji: "🎁👵" },
+      { text: "Sexy video filming", emoji: "🎥🔥" },
+      { text: "Have Dubai chocolate / Madella / Hibba", emoji: "🍫💖" },
+      { text: "Neck massage", emoji: "💆💆‍♀️" },
+      { text: "Best donuts ordering", emoji: "🍩😍" },
+      { text: "Order gift for Adeel", emoji: "🎁🧑" },
+      { text: "Buttserfly 🦋 massage / pakrdna kya?", emoji: "🦋😜" },
+      { text: "Panty shopping", emoji: "🩲🛍️" },
+      { text: "Carrefour cheese zatar", emoji: "🧀🫓" },
+      { text: "Order gift for Nabeel", emoji: "🎁🧔" },
+      { text: "Full back massage", emoji: "💆‍♂️💆‍♀️" }
+    ];
+
+    function generateFun() {
+      const card = document.getElementById("card");
+      const { text, emoji } = funIdeas[Math.floor(Math.random() * funIdeas.length)];
+      card.innerHTML = `<div style="font-size: 2.5rem;">${emoji}</div><div style="margin-top: 15px;">${text}</div>`;
+      card.style.display = "block";
+    }
+  </script>
+</body>
+</html>
+Add index.html
